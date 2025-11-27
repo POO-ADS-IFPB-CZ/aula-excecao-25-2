@@ -1,6 +1,7 @@
 package model;
 
 import exceptions.LimiteExcedidoException;
+import exceptions.SaldoInsuficienteException;
 
 public class ContaCorrente {
     private int numero;
@@ -43,6 +44,21 @@ public class ContaCorrente {
                     "Limite de transação excedido");
         }
         saldo += valor;
+        return true;
+    }
+
+    public boolean sacar(float valor) throws LimiteExcedidoException,
+            SaldoInsuficienteException{
+        if(valor > 10000){
+            throw new LimiteExcedidoException(
+                    "Limite de transação excedido");
+        }
+        if(valor > saldo){
+            throw new SaldoInsuficienteException(
+                    "Saldo insuficiente"
+            );
+        }
+        saldo -= valor;
         return true;
     }
 
