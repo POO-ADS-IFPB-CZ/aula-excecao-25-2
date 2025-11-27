@@ -1,23 +1,20 @@
-import java.io.File;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ConnectionBuilder;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import exceptions.LimiteExcedidoException;
+import model.ContaCorrente;
 
 public class Main {
 
     public static void main(String[] args) {
-        try(Connection connection = DriverManager.getConnection("","","")){
-            System.out.println(10/0);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+        ContaCorrente contaCorrente =
+                new ContaCorrente(123,"João", 0);
+
+        try{
+            if(contaCorrente.depositar(1000000)){
+                System.out.println("Depositado com sucesso...");
+            }
+        }catch (LimiteExcedidoException ex){
+            System.out.println(ex.getMessage());
         }
-    }
 
-    private static void criarArquivo(String arquivo)
-            throws IOException{
-        throw new IOException("Exceção");
     }
-
 }
