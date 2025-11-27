@@ -1,25 +1,23 @@
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ConnectionBuilder;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Antes...");
-        try{
-            criarArquivo("arquivo.txt");
-        }catch (IOException ex){
-            System.out.println("Falha");
-        }catch (ArithmeticException ex){
-            System.out.println("Exceção aritimética");
-        } finally{
-            System.out.println("Sempre vai executar");
+        try(Connection connection = DriverManager.getConnection("","","")){
+            System.out.println(10/0);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        System.out.println("Teste");
     }
 
     private static void criarArquivo(String arquivo)
             throws IOException{
-//        throw new IOException("Exceção");
+        throw new IOException("Exceção");
     }
 
 }
